@@ -5,11 +5,14 @@ let connectionStatus = 'disconnected';
 
 const startDatabase = async () => {
     try {
-        await mongoose.connect(process.env.URI);
-        connectionStatus = "Congratulations the database has been connected!!";
+        await mongoose.connect(process.env.URI, {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+        });
+        connectionStatus = "Congratulations, the database has been connected!";
     } catch (err) {
-        console.error("Failed to connect to database");
-        connectionStatus = "Failed to connect to database";
+        console.error("Failed to connect to the database:", err);
+        connectionStatus = "Failed to connect to the database";
     }
 };
 
